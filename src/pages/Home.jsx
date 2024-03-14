@@ -6,7 +6,8 @@ import './../components/styles/layout.css'
 const Home = () => {
   return (
     <Layout>
-      
+      <h1>Home</h1>
+      <p>This is the content of your home page.</p>
     </Layout>
   )
 }
