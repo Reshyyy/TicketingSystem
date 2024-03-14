@@ -8,10 +8,10 @@ import rafiNavbarLogo from './../../assets/rafiLogo.png'
 const NavbarBootstrap = () => {
     return (
         <div>
-            <Navbar expand="lg" className="bg-body-tertiary rounded-pill">
+            <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <img src={rafiNavbarLogo} style={{ height: '60px', width: '100px' }} alt="navbarLogo" />
-                    <Navbar.Brand href="#home">RAFI</Navbar.Brand>
+                    <Navbar.Brand href="/login">RAFI</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">

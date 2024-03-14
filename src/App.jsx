@@ -7,6 +7,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import TSHome from './pages/TSHome';
 import TSCreate from './pages/TSCreate';
+import LoginPage from './pages/LoginPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 

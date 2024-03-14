@@ -1,6 +1,6 @@
 /* layout.css */
-body {
-    background-image: url('../../assets/rafiBG.png');
+.body {
+    background-image: url('./../../assets/rafiBG.png');
     background-repeat: no-repeat; /* Prevent image repetition */
     background-size: cover; /* Cover the whole page */
     background-attachment: fixed; /* Keep the image in place on scroll */
