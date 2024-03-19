@@ -11,7 +11,7 @@ const TSCreate = () => {
 
     return (
         <MainLayout>
-            <div className='bg-form p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
+            <div className='p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
                 <h6 className='font-weight-bold mb-4'>DESCRIBE YOUR ISSUE</h6>
                 <Row>
                     <Col sm={8}>
@@ -105,13 +105,31 @@ const TSCreate = () => {
 
                         </Form.Group>
                     </Col>
+
                 </Row>
-                <Stack direction='justify-end'>
-                    <div>Solution not in the list?</div>
-                    <div>
-                        <Button>Submit</Button>
-                    </div>
-                </Stack>
+                <Row style={{ justifyContent: 'end' }}>
+                    {/* <Col>
+                        <p htmlFor="solution">Solution not in the list?</p>
+                    </Col>
+                    <Col>
+                        <Button id="solution" className='btn btn-sm w-50'>Submit</Button>
+                    </Col> */}
+                    <Col sm={9}>
+                    </Col>
+                    <Col sm={2}>
+                        <Form.Group as={Row} controlId="formHorizontalSubmit">
+                            <Form.Label>
+                                Solution not in the list?
+                            </Form.Label>
+                                <Button type="button" id="solution" className='btn btn-sm btn-secondary'>Submit</Button>
+                        </Form.Group>
+                    </Col>
+                    <Col sm={1}>
+                    
+                    </Col>
+
+
+                </Row>
             </div>
         </MainLayout>
 
