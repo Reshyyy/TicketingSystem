@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import TSHome from './pages/TSHome';
 import TSCreate from './pages/TSCreate';
 import LoginPage from './pages/LoginPage';
+import Sidebar from './components/sidebar/Sidebar';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
 
         <Route path="/dashboard" element={<TSHome />} />
         <Route path="/create" element={<TSCreate />} />
+
+        {/* Test */}
+        <Route path="/test" element={<Sidebar />} />
       </Routes>
     </Router>
   )

@@ -1,0 +1,18 @@
+/* mainlayout.css */
+.body {
+    background-color: violet;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.bg-color {
+    background-color: #74A12E;
+}
+
+/* .content {
+    flex: 1;
+} */

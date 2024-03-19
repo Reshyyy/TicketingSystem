@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
-import { Button, Col, Container, Form, Row, Stack } from 'react-bootstrap'
+import { Button, Col, Container, Form, Nav, Row, Stack } from 'react-bootstrap'
 import Create from '../components/Create'
 import TicketTable from '../components/TicketTable'
 import NewButton from '../components/NewButton'
-import './../components/styles/dashboard.css'
+import './../components/styles/tshome.css'
+import NavbarBootstrap from '../components/header/Navbar'
+import NavbarMain from '../components/header/NavbarMain'
+import Sidebar from '../components/sidebar/Sidebar'
+import MainLayout from '../components/layout/MainLayout'
 
 const TSHome = () => {
     const [date, setDate] = useState(new Date());
@@ -16,13 +20,12 @@ const TSHome = () => {
 
     return (
         // Dashboard
-        <Layout>
-            <Container fluid>
-                <div className='p-4 mt-2 border bg-form'>
+        <MainLayout>
+                <div className='p-5 mt-3 border bg-white shadow p-3 mb-5 bg-white rounded'>
                     <Row className='mb-2'>
                         <Col sm={2}>
                             <div class="form-group" >
-                                <label for="exampleFormControlInput1">Company</label>
+                                <label for="exampleFormControlInput1"><b>Company</b></label>
                                 <Form.Select aria-label="Default select example">
                                     <option value="1">Education</option>
                                     <option value="2">Accounting</option>
@@ -32,7 +35,7 @@ const TSHome = () => {
                         </Col>
                         <Col sm={2}>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Type of Issue</label>
+                                <label for="exampleFormControlInput1"><b>Type of Issue</b></label>
                                 <Form.Select aria-label="Default select example">
                                     <option value="1">Error</option>
                                     <option value="2">Information</option>
@@ -43,7 +46,7 @@ const TSHome = () => {
                         </Col>
                         <Col sm={2}>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Date Coverage</label>
+                                <label for="exampleFormControlInput1"><b>Date Coverage</b></label>
                                 <Form.Control
                                     type="date"
                                     name="datepic"
@@ -55,7 +58,7 @@ const TSHome = () => {
                         </Col>
                     </Row>
                     <Row className='mb-2'>
-                        <Col sm={3}>
+                        <Col sm={4}>
 
                             <Stack direction='horizontal' gap={2}>
                                 <NewButton />
@@ -87,9 +90,11 @@ const TSHome = () => {
                         <TicketTable />
                     </Row>
                 </div>
+        </MainLayout>
 
-            </Container>
-        </Layout>
+
+
+
     )
 }
 

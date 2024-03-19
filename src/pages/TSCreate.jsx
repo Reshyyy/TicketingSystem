@@ -5,12 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Layout from '../components/layout/Layout';
+import MainLayout from '../components/layout/MainLayout';
 
 const TSCreate = () => {
-    
+
     return (
-        <Layout>
-            <div className='container bg-form p-5'>
+        <MainLayout>
+            <div className='bg-form p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
                 <h6 className='font-weight-bold mb-4'>DESCRIBE YOUR ISSUE</h6>
                 <Row>
                     <Col sm={8}>
@@ -112,7 +113,8 @@ const TSCreate = () => {
                     </div>
                 </Stack>
             </div>
-        </Layout>
+        </MainLayout>
+
 
 
     )

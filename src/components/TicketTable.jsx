@@ -19,7 +19,7 @@ const TicketTable = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">7/20/2018</th>
+                        <td>7/20/2018</td>
                         <td>TCK-000000001</td>
                         <td>Critical</td>
                         <td>Cannot Print Invoice</td>
