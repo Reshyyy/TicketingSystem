@@ -43,9 +43,9 @@ const LoginPage = () => {
                   </Link>
                 </Col>
                 <Col item>
-                  <Link to="/login">
+                  <a href="/register">
                     <p><small>Don't have an account? Sign Up</small></p>
-                  </Link>
+                  </a>
                 </Col>
               </Row>
             </Card.Body>

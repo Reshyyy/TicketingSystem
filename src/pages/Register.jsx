@@ -53,9 +53,9 @@ const Register = () => {
                         <div className='d-flex justify-content-end'>
                             <Row container className='mt-2'>
                                 <Col item>
-                                    <Link href="#">
+                                    <a href="/login">
                                         <p><small>Already have an account? Sign in</small></p>
-                                    </Link>
+                                    </a>
                                 </Col>
                             </Row>
                         </div>
