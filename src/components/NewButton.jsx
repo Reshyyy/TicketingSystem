@@ -2,8 +2,8 @@ import React from 'react'
 
 const NewButton = () => {
     return (
-        <div>
-            <button type="button" class="btn btn-warning">New</button>
+        <div style={{width: '80px'}}>
+            <button type="button" className="btn btn-warning w-100">New</button>
         </div>
     )
 }
