@@ -4,10 +4,11 @@ import './login.css'
 import rafiLogo from './../assets/rafiLogo.png'
 import { Button, Card, Col, Container, FloatingLabel, Form, InputGroup, Row, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import './../components/styles/register.css'
 
 const Register = () => {
     return (
-        <Container fluid>
+        <Container fluid className='register-bg'>
             <div className='d-flex align-items-center justify-content-center vh-100'>
 
                 <Card className='d-flex justify-content-center p-2' style={{ width: '24rem' }}>
