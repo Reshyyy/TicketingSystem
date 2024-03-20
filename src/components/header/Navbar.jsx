@@ -7,7 +7,7 @@ import rafiNavbarLogo from './../../assets/rafiLogo.png'
 
 const NavbarBootstrap = () => {
     return (
-        <div>
+        <div className='bg-light'>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <img src={rafiNavbarLogo} style={{ height: '60px', width: '100px' }} alt="navbarLogo" />

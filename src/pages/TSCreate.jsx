@@ -108,12 +108,6 @@ const TSCreate = () => {
 
                 </Row>
                 <Row style={{ justifyContent: 'end' }}>
-                    {/* <Col>
-                        <p htmlFor="solution">Solution not in the list?</p>
-                    </Col>
-                    <Col>
-                        <Button id="solution" className='btn btn-sm w-50'>Submit</Button>
-                    </Col> */}
                     <Col sm={9}>
                     </Col>
                     <Col sm={2}>
@@ -127,8 +121,6 @@ const TSCreate = () => {
                     <Col sm={1}>
                     
                     </Col>
-
-
                 </Row>
             </div>
         </MainLayout>

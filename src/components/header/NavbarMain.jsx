@@ -11,18 +11,15 @@ const NavbarMain = () => {
         <div>
             <Navbar expand="lg" className="bg-body-tertiary">
                 {/* <Container> */}
-                <Stack direction='horizontal'>
                     <Stack>
                         <img src={rafiNavbarLogo} style={{ height: '60px', width: '100px' }} alt="navbarLogo" />
                     </Stack>
-                    <div className='d-flex justicy-content-center align-middle'>
-                        <Stack>
-                            <h6>Ticketing System</h6>
-                            <h6>RAFI - Ramon Aboitiz Foundation Inc.</h6>
-                        </Stack>
-                    </div>
+                    <Stack>
+                        <h6>Ticketing System</h6>
+                        <h6>RAFI - Ramon Aboitiz Foundation Inc.</h6>
+                    </Stack>
 
-                </Stack>
+
 
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
