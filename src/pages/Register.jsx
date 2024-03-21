@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarBootstrap from '../components/header/Navbar'
+import NavbarBootstrap from '../components/header/NavbarBootstrap'
 import './login.css'
 import rafiLogo from './../assets/rafiLogo.png'
 import { Button, Card, Col, Container, FloatingLabel, Form, InputGroup, Row, Stack } from 'react-bootstrap'

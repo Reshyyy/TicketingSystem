@@ -33,7 +33,7 @@ const NavbarMain = () => {
 
                 <Col sm={2} className='d-flex justify-content-end'>
                     <Nav>
-                        <Nav.Link href="/logout"><b>Logout</b></Nav.Link>
+                        <Nav.Link href="/"><b>Logout</b></Nav.Link>
                     </Nav>
                 </Col>
 

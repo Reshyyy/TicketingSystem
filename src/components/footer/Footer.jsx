@@ -2,8 +2,10 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer className="footer text-center">
-            <p>&copy; {new Date().getFullYear()} Ramon Aboitiz Foundation Inc. </p>
+        <footer className="footer text-center p-2 d-flex justify-content-center align-items-center">
+            <div>
+                &copy; {new Date().getFullYear()} Ramon Aboitiz Foundation Inc.
+            </div>
         </footer>
     )
 }

@@ -14,6 +14,7 @@ import TSDashboard from './pages/TSDashboard';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>
@@ -24,6 +25,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
+        {/* <Route path="/dashboard" element={
+          isLoggedIn ? <TSDashboard /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />
+        } /> */}
         <Route path="/dashboard" element={<TSDashboard />} />
         <Route path="/create" element={<TSCreate />} />
         {/* <Route path="/login" element={<TSLogin />} /> */}

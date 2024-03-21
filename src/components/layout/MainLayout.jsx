@@ -1,6 +1,6 @@
 import React from 'react'
 import './../styles/layout.css'
-import NavbarBootstrap from '../header/Navbar'
+import NavbarBootstrap from '../header/NavbarBootstrap'
 import Footer from '../footer/Footer'
 import rafiBG from './../../assets/rafiBG.png'
 import { Image } from 'react-bootstrap'
