@@ -67,12 +67,26 @@ const TSCreate = () => {
                                 <Form.Control as="textarea" rows={3} />
                             </Form.Group>
 
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalAttach">
-                                <Form.Label>
-                                    Attach file or screenshot of Issue (4 MB Maximum)
-                                </Form.Label>
-                                <Col sm={5}>
+                            <Form.Group as={Row} className="" controlId="formHorizontalAttach">
+
+                                <Col sm={6}>
+                                    <Form.Label style={{ fontSize: '14px' }}>
+                                        Attach file or screenshot of Issue (4 MB Maximum)
+                                    </Form.Label>
                                     <Form.Control type="file" />
+                                </Col>
+
+                                <Col sm={3}>
+                                    
+                                </Col>
+
+                                <Col sm={3} className='d-flex justify-content-start'>
+                                    <Form.Group as={Row} controlId="formHorizontalSubmit">
+                                        <Form.Label style={{ fontSize: '14px', fontStyle: 'italic' }}>
+                                             Solution not in the list?
+                                        </Form.Label>
+                                        <Button type="button" id="solution" className='btn btn-sm btn-secondary'>Submit</Button>
+                                    </Form.Group>
                                 </Col>
 
                             </Form.Group>
@@ -107,7 +121,7 @@ const TSCreate = () => {
                     </Col>
 
                 </Row>
-                <Row style={{ justifyContent: 'end' }}>
+                {/* <Row style={{ justifyContent: 'end' }}>
                     <Col sm={9}>
                     </Col>
                     <Col sm={2}>
@@ -115,13 +129,13 @@ const TSCreate = () => {
                             <Form.Label>
                                 Solution not in the list?
                             </Form.Label>
-                                <Button type="button" id="solution" className='btn btn-sm btn-secondary'>Submit</Button>
+                            <Button type="button" id="solution" className='btn btn-sm btn-secondary'>Submit</Button>
                         </Form.Group>
                     </Col>
                     <Col sm={1}>
-                    
+
                     </Col>
-                </Row>
+                </Row> */}
             </div>
         </MainLayout>
 

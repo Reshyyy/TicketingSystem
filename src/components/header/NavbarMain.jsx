@@ -8,17 +8,19 @@ import { Col, Stack } from 'react-bootstrap';
 
 const NavbarMain = () => {
     return (
-        <div>
-            <Navbar expand="lg" className="">
+
+            <Navbar expand="lg" className='p-0'>
                 {/* <Container> */}
-                    <Stack>
+                <Col sm={10} className='d-flex justify-content-start p-0'>
+                    <Stack direction="horizontal" alignItems="center">
                         <img src={rafiNavbarLogo} style={{ height: '60px', width: '100px' }} alt="navbarLogo" />
                     </Stack>
-                    <Stack className='d-flex flex-column justify-content-start'>
+                    <Stack direction="column" alignItems="start" gap={1}>
                         <h6>Ticketing System</h6>
                         <h6>RAFI - Ramon Aboitiz Foundation Inc.</h6>
                     </Stack>
-                
+                </Col>
+
                 {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
                 {/* <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -28,8 +30,15 @@ const NavbarMain = () => {
                         </Nav>
                     </Navbar.Collapse> */}
                 {/* </Container> */}
+
+                <Col sm={2} className='d-flex justify-content-end'>
+                    <Nav>
+                        <Nav.Link href="/logout"><b>Logout</b></Nav.Link>
+                    </Nav>
+                </Col>
+
+
             </Navbar>
-        </div>
     )
 }
 
