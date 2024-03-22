@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Layout from '../components/layout/Layout';
 import MainLayout from '../components/layout/MainLayout';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const TSCreate = () => {
     // Variables
@@ -19,6 +20,7 @@ const TSCreate = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [issueAreas, setIssueAreas] = useState([]);
     const [issueTypes, setIssueTypes] = useState([]);
+    const navigate = useNavigate();
 
     const [submittedData, setSubmittedData] = useState([]);
     const fileInputRef = useRef(null);
@@ -102,6 +104,7 @@ const TSCreate = () => {
         axios.post('/api/TicketingSystem/Dynamic/api?functionName=AddTicket', formData)
             .then(response => {
                 console.log('Add Ticket Successful:', response.data);
+                navigate('/dashboard');
             })
             .catch(error => {
                 console.error('Error adding ticket', error);

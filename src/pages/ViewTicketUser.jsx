@@ -11,10 +11,12 @@ import { useParams } from 'react-router-dom';
 
 const ViewTicketUser = () => {
     // Local Variables
-    const [viewTicketDetails, setViewTicketDetails] = useState([]);
+    const [viewTicketDetails, setViewTicketDetails] = useState({ Header: {} });
+    const [issueTypes, setIssueTypes] = useState([]);
     const { ticketID } = useParams();
 
-    // Fetch and Render Data
+
+    // Fetch Data and Render of Data
     useEffect(() => {
         const fetchTicketDetails = async () => {
             const formData = {
@@ -38,8 +40,18 @@ const ViewTicketUser = () => {
                 console.error('Error while fetching Issue Areas', error)
             }
         }
+
         fetchTicketDetails();
     }, [])
+
+    // useEffect(() => {
+    //     if (viewTicketDetails) {
+    //         setIssueTypes(viewTicketDetails.Header.IssueTypeName)
+    //         console.log('issue type', issueTypes)
+    //     }
+
+    //     fetchTicketDetails();
+    // }, [viewTicketDetails]);
 
     return (
         <MainLayout>
@@ -53,12 +65,23 @@ const ViewTicketUser = () => {
                                     Problem Type
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example">
+                                    {/* <Form.Select aria-label="Default select example">
                                         <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
                                         <option value="Critical">Critical</option>
+                                    </Form.Select> */}
+                                    <Form.Select aria-label="Default select example" disabled>
+                                        {/* {issueTypes.map((type) => {
+                                            return (
+                                                <option key={type.IssueTypeID} value={type.IssueTypeID}>
+                                                    {type.IssueTypeName}
+                                                </option>
+                                            )
+                                        })} */}
+                                        <option>{viewTicketDetails.Header.IssueTypeName}</option>
+
                                     </Form.Select>
                                 </Col>
                                 <Col>
@@ -68,12 +91,13 @@ const ViewTicketUser = () => {
                                     Status
                                 </Form.Label>
                                 <Col lg={3}>
-                                    <Form.Select aria-label="Default select example">
-                                        <option value="">Select an option...</option>
+                                    <Form.Select aria-label="Default select example" disabled>
+                                        {/* <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
-                                        <option value="Critical">Critical</option>
+                                        <option value="Critical">Critical</option> */}
+                                        <option key={viewTicketDetails.Header.StatusID}>{viewTicketDetails.Header.StatusName}</option>
                                     </Form.Select>
                                 </Col>
                             </Form.Group>
@@ -84,12 +108,13 @@ const ViewTicketUser = () => {
                                     Problem Area
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example">
-                                        <option value="">Select an option...</option>
+                                    <Form.Select aria-label="Default select example" disabled>
+                                        {/* <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
-                                        <option value="Critical">Critical</option>
+                                        <option value="Critical">Critical</option> */}
+                                        <option>{viewTicketDetails.Header.IssueAreaName}</option>
                                     </Form.Select>
                                 </Col>
                                 <Col>
@@ -99,12 +124,13 @@ const ViewTicketUser = () => {
                                     Severity
                                 </Form.Label>
                                 <Col lg={3}>
-                                    <Form.Select aria-label="Default select example">
-                                        <option value="">Select an option...</option>
+                                    <Form.Select aria-label="Default select example" disabled>
+                                        {/* <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
-                                        <option value="Critical">Critical</option>
+                                        <option value="Critical">Critical</option> */}
+                                        <option>{viewTicketDetails.Header.SeverityName}</option>
                                     </Form.Select>
                                 </Col>
                             </Form.Group>
@@ -114,32 +140,32 @@ const ViewTicketUser = () => {
                                     Title
                                 </Form.Label>
                                 <Col sm={10} lg={9}>
-                                    <input style={{ width: '100%' }} type="text" class="form-control" id="ticketTitle" />
+                                    <input disabled style={{ width: '100%' }} type="text" value={viewTicketDetails.Header.TicketTitle} class="form-control" id="ticketTitle" />
                                 </Col>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTicketDetails">
                                 <Form.Label>Tell us more about your problem</Form.Label>
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control as="textarea" disabled value={viewTicketDetails.Header.TicketDetails} rows={3} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTicketError">
                                 <Form.Label>Exact error message (if applicable)</Form.Label>
-                                <Form.Control as="textarea" rows={2} />
+                                <Form.Control as="textarea" disabled value={viewTicketDetails.Header.TicketError} rows={2} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTicketSteps">
                                 <Form.Label>Steps to reproduce the issue</Form.Label>
-                                <Form.Control as="textarea" rows={3} />
+                                <Form.Control as="textarea" disabled value={viewTicketDetails.Header.TicketSteps} rows={3} />
                             </Form.Group>
 
-                            <Form.Group as={Row} className="" controlId="formHorizontalAttach">
+                            <Form.Group as={Row} controlId="formHorizontalAttach">
 
                                 <Col sm={6}>
                                     <Form.Label style={{ fontSize: '14px', padding: 0 }}>
                                         Attach file or screenshot of Issue (4 MB Maximum)
                                     </Form.Label>
-                                    <Form.Control type="file" />
+                                    <Form.Control type="file" disabled />
                                 </Col>
 
                                 <Col sm={1} style={{ padding: 0 }}>
@@ -151,7 +177,7 @@ const ViewTicketUser = () => {
                                         <Form.Label style={{ fontSize: '14px', padding: 0 }}>
                                             Consultant
                                         </Form.Label>
-                                        <input style={{ width: '100%' }} type="text" class="form-control" id="title" />
+                                        <input style={{ width: '100%' }} disabled value={viewTicketDetails.Header.ConsultantFirstName + " " + viewTicketDetails.Header.ConsultantMiddleName + " " + viewTicketDetails.Header.ConsultantLastName} type="text" class="form-control" id="title" />
                                     </Form.Group>
                                 </Col>
 

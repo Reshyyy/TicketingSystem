@@ -5,6 +5,18 @@ import axios from 'axios'
 const TicketTable = ({ onTicketClick }) => {
     // Variables
     const [viewTickets, setViewTickets] = useState([]);
+    const currentDate = new Date();
+
+    // Functions
+    function calculateTicketAge(ticketDateFiled) {
+        const filedDate = new Date(ticketDateFiled);
+        const timeDifference = currentDate.getTime() - filedDate.getTime();
+
+        // Convert milliseconds to days (you can adjust for hours, minutes, etc.)
+        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return daysDifference + ' day(s)';
+    }
+
 
     // Fetch Data
     const fetchViewTickets = async () => {
@@ -44,13 +56,13 @@ const TicketTable = ({ onTicketClick }) => {
                                     {ticket.TicketID}
                                 </a>
                             </td>
-                            <td>{ticket.Severity}</td>
-                            <td>{new Date(ticket.TicketDateFiled).toLocaleDateString('en-US',{dateStyle: 'short'})}</td>
+                            <td>{ticket.SeverityName}</td>
+                            <td>{new Date(ticket.TicketDateFiled).toLocaleDateString('en-US', { dateStyle: 'short' })}</td>
                             <td>{ticket.IssueTypeName}</td>
-                            {/* <td>{ticket.TicketStatus}</td> */}
-                            {/* <td>{ticket.TicketBy}</td> */}
-                            {/* <td>{ticket.TicketAssgned}</td> */}
-                            {/* <td>{ticket.TicketAge}</td> */}
+                            <td>{ticket.StatusName}</td>
+                            <td>{ticket.FirstName + " " + ticket.MiddleName + " " + ticket.LastName}</td>
+                            <td>{ticket.ConsultantFirstName + " " + ticket.ConsultantMiddleName + " " + ticket.ConsultantLastName}</td>
+                            <td>{calculateTicketAge(ticket.TicketDateFiled)}</td>
                         </tr>
                     ))}
                 </tbody>
