@@ -12,6 +12,9 @@ import Sidebar from './components/sidebar/Sidebar';
 import Register from './pages/Register';
 import TSDashboard from './pages/TSDashboard';
 import ViewTicketUser from './pages/ViewTicketUser';
+import TSAssigned from './pages/TSAssigned';
+import ViewTicketCon from './pages/ViewTicketCon';
+import ViewTicket from './pages/ViewTicket';
 
 
 function App() {
@@ -28,6 +31,11 @@ function App() {
 
         {/* User */}
         <Route path="/tickets/:ticketID" element={<ViewTicketUser />} />
+        <Route path="/consultant/dashboard" element={<TSAssigned />} />
+        <Route path="/consultant/tickets/:ticketID" element={<ViewTicketCon />} />
+
+        {/* If Role Implemented */}
+        {/* <Route path="/tickets/:ticketID" element={<ViewTicket />} /> */}
 
         {/* <Route path="/dashboard" element={
           isLoggedIn ? <TSDashboard /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />

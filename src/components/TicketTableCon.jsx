@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import axios from 'axios'
 
-const TicketTable = ({ onTicketClick }) => {
+const TicketTableCon = ({ onTicketClick }) => {
     // Variables
-    const [viewTickets, setViewTickets] = useState([]); // view all
-    const [viewTicketPerUser, setViewTicketPerUser] = useState([]); // per user
+    // const [viewTickets, setViewTickets] = useState([]);
+    const [viewTicketsPerConsultant, setViewTicketsPerConsultant] = useState([]);
     const currentDate = new Date();
 
     // Functions
@@ -22,34 +22,30 @@ const TicketTable = ({ onTicketClick }) => {
     // Fetch Data
     // const fetchViewTickets = async () => {
     //     try {
-    //         // const UserID = 'ACC-0000001'
     //         const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets');
     //         setViewTickets(response.data);
     //     } catch (error) {
     //         console.error('Error viewing tickets', error);
     //     }
     // }
-
-    const fetchViewTicketsPerUser = async () => {
+    const fetchViewTicketsPerConsultant = async () => {
         const formData = {
-            "ViewTicketsPerUser": {
-                "UserID": "'ACC-0000001'"
+            "ViewTicketsPerConsultant": {
+                "ConsultantID": "'ACC-0000002'"
             }
         }
 
         try {
-            // const UserID = 'ACC-0000001'
-            const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTicketsPerUser', formData);
-            setViewTicketPerUser(response.data);
+            const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTicketsPerConsultant', formData);
+            setViewTicketsPerConsultant(response.data);
         } catch (error) {
-            console.error('Error viewing tickets per user', error);
+            console.error('Error viewing tickets', error);
         }
     }
 
     // Execute
     useEffect(() => {
-        // fetchViewTickets();
-        fetchViewTicketsPerUser();
+        fetchViewTicketsPerConsultant();
     }, []);
 
     return (
@@ -68,10 +64,10 @@ const TicketTable = ({ onTicketClick }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {viewTicketPerUser.map(ticket => (
+                    {viewTicketsPerConsultant.map(ticket => (
                         <tr key={ticket.ticketID}>
                             <td>
-                                <a href={`/tickets/${ticket.TicketID}`} onClick={() => onTicketClick(ticket.TicketID)}>
+                                <a href={`/consultant/tickets/${ticket.TicketID}`} onClick={() => onTicketClick(ticket.TicketID)}>
                                     {ticket.TicketID}
                                 </a>
                             </td>
@@ -90,4 +86,4 @@ const TicketTable = ({ onTicketClick }) => {
     )
 }
 
-export default TicketTable
+export default TicketTableCon
