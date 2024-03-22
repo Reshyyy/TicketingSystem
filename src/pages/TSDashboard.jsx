@@ -24,7 +24,7 @@ const TSDashboard = () => {
     }
 
     const handleTicketClick = (ticketID) => {
-        navigate(`/view-ticket/${ticketID}`); // Replace with your desired navigation logic
+        navigate(`/tickets/${ticketID}`); // Replace with your desired navigation logic
     }
 
     // const fetchViewTickets = async () => {

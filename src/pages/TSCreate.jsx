@@ -9,25 +9,42 @@ import MainLayout from '../components/layout/MainLayout';
 import axios from 'axios';
 
 const TSCreate = () => {
-    const [problemType, setProblemType] = useState('');
-    const [problemArea, setProblemArea] = useState('');
+    // Variables
+    const [issueType, setIssueType] = useState('');
+    const [issueArea, setIssueArea] = useState('');
     const [ticketTitle, setTicketTitle] = useState('');
     const [ticketDetails, setTicketDetails] = useState('');
     const [ticketError, setTicketError] = useState('');
     const [ticketSteps, setTicketSteps] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [issueAreas, setIssueAreas] = useState([]);
+    const [issueTypes, setIssueTypes] = useState([]);
 
     const [submittedData, setSubmittedData] = useState([]);
     const fileInputRef = useRef(null);
 
+    // On Change
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    // Fetch Data
+    useEffect(() => {
+        if (selectedFile) {
+            console.log("File Name:", selectedFile.name);
+            console.log("File Size:", selectedFile.size, "bytes");
+        }
+    }, [selectedFile]);
+
     useEffect(() => {
         const fetchViewIssueAreas = async () => {
             const formData = {
-        
+                "ViewIssueAreas": {
+                    "IssueAreaName": ""
+                }
             }
             try {
-                const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewIssueAreas');
+                const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewIssueAreas', formData);
                 if (response.status === 200) { // Assuming 200 is the success status
                     setIssueAreas(response.data);
                 } else {
@@ -37,23 +54,41 @@ const TSCreate = () => {
                 console.error('Error while fetching Issue Areas', error)
             }
         }
+        const fetchViewIssueTypes = async () => {
+            const formData = {
+                "ViewIssueTypes": {
+                    "IssueAreaName": ""
+                }
+            }
+            try {
+                const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewIssueTypes', formData);
+                if (response.status === 200) { // Assuming 200 is the success status
+                    setIssueTypes(response.data);
+                } else {
+                    console.error('Cannot fetch Issue Types', response.status);
+                }
+            } catch (error) {
+                console.error('Error while fetching Issue Types', error)
+            }
+        }
         fetchViewIssueAreas();
+        fetchViewIssueTypes();
     }, [])
 
+    // Submit
     const handleCreateSubmit = async (e) => {
         e.preventDefault();
 
         // Validation logic
-        if (!problemType || !problemArea || !ticketTitle || !ticketDetails) {
+        if (!issueType || !issueArea || !ticketTitle || !ticketDetails) {
             alert("Please fill in all required fields.");
             return;
         }
 
-
         const formData = {
             "AddTicket": {
-                issueTypeID: problemType,
-                issueAreaID: problemArea,
+                issueTypeID: `'${issueType}'`,
+                issueAreaID: `'${issueArea}'`,
                 userID: "'ACC-0000001'",
                 ticketTitle: ticketTitle,
                 ticketDetails: ticketDetails,
@@ -77,16 +112,6 @@ const TSCreate = () => {
 
     }
 
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
-    };
-
-    useEffect(() => {
-        if (selectedFile) {
-            console.log("File Name:", selectedFile.name);
-            console.log("File Size:", selectedFile.size, "bytes");
-        }
-    }, [selectedFile]);
 
     return (
         <MainLayout>
@@ -100,13 +125,22 @@ const TSCreate = () => {
                                     Problem Type
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example" value={problemType} onChange={(e) => setProblemType(e.target.value)}>
+                                    <Form.Select aria-label="Default select example" value={issueType} onChange={(e) => setIssueType(e.target.value)}>
+                                        <option value="">Select an option...</option>
+                                        {issueTypes.map((type) => (
+                                            <option key={type.IssueTypeID} value={type.IssueTypeID}>
+                                                {type.IssueTypeName}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+
+                                    {/* <Form.Select aria-label="Default select example" value={issueType} onChange={(e) => setIssueType(e.target.value)}>
                                         <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
                                         <option value="High">High</option>
                                         <option value="Critical">Critical</option>
-                                    </Form.Select>
+                                    </Form.Select> */}
                                 </Col>
                             </Form.Group>
 
@@ -115,12 +149,24 @@ const TSCreate = () => {
                                     Problem Area
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example" value={problemArea} onChange={(e) => setProblemArea(e.target.value)}>
+
+
+                                    <Form.Select aria-label="Default select example" value={issueArea} onChange={(e) => setIssueArea(e.target.value)}>
+                                        <option value="">Select an option...</option>
+                                        {issueAreas.map((area) => (
+                                            <option key={area.IssueAreaID} value={area.IssueAreaID}>
+                                                {area.IssueAreaName}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+
+
+                                    {/* <Form.Select aria-label="Default select example" value={problemArea} onChange={(e) => setProblemArea(e.target.value)}>
                                         <option value="">Select an option...</option>
                                         <option value="Fixed Assets">Fixed assets</option>
                                         <option value="General Ledger">General Ledger</option>
                                         <option value="Public Sector">Public sector</option>
-                                    </Form.Select>
+                                    </Form.Select> */}
                                 </Col>
                             </Form.Group>
 
@@ -175,7 +221,7 @@ const TSCreate = () => {
                         </Form>
                     </Col>
                     <Col>
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalAttach">
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPossible">
                             <Form.Label column sm={8} className='font-weight-bold'>
                                 POSSIBLE ISSUE SOLUTIONS
                             </Form.Label>

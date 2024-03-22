@@ -1,31 +1,25 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
+import axios from 'axios'
 
 const TicketTable = ({ onTicketClick }) => {
+    // Variables
     const [viewTickets, setViewTickets] = useState([]);
 
+    // Fetch Data
     const fetchViewTickets = async () => {
-        const formData = {
-            "ViewTickets": {
-                "ticketID": ""
-            }
-        }
         try {
-            const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets', formData);
-            if (response.status === 200) { // Assuming 200 is the success status
-                setViewTickets(response.data);
-            } else {
-                console.error('Error viewing tickets: Response status:', response.status);
-            }
+            const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets');
+            setViewTickets(response.data);
         } catch (error) {
             console.error('Error viewing tickets', error);
         }
     }
 
+    // Execute
     useEffect(() => {
         fetchViewTickets();
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -34,7 +28,7 @@ const TicketTable = ({ onTicketClick }) => {
                     <tr>
                         <th scope="col">Ticket Number</th>
                         <th scope="col">Severity</th>
-                        <th scope="col">Date FIled</th>
+                        <th scope="col">Date Filed</th>
                         <th scope="col">Issue</th>
                         <th scope="col">Status</th>
                         <th scope="col">Raised by</th>
@@ -51,9 +45,12 @@ const TicketTable = ({ onTicketClick }) => {
                                 </a>
                             </td>
                             <td>{ticket.Severity}</td>
-                            <td>{ticket.TicketDateFiled}</td>
+                            <td>{new Date(ticket.TicketDateFiled).toLocaleDateString('en-US',{dateStyle: 'short'})}</td>
                             <td>{ticket.IssueTypeName}</td>
                             {/* <td>{ticket.TicketStatus}</td> */}
+                            {/* <td>{ticket.TicketBy}</td> */}
+                            {/* <td>{ticket.TicketAssgned}</td> */}
+                            {/* <td>{ticket.TicketAge}</td> */}
                         </tr>
                     ))}
                     {/* <tr>

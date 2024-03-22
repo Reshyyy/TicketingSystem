@@ -27,7 +27,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
 
         {/* User */}
-        <Route path="/view-ticket/:ticketID" element={<ViewTicketUser />} />
+        <Route path="/tickets/:ticketID" element={<ViewTicketUser />} />
 
         {/* <Route path="/dashboard" element={
           isLoggedIn ? <TSDashboard /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />
@@ -35,9 +35,6 @@ function App() {
         <Route path="/dashboard" element={<TSDashboard />} />
         <Route path="/create" element={<TSCreate />} />
         {/* <Route path="/login" element={<TSLogin />} /> */}
-
-        {/* Test */}
-        <Route path="/test" element={<Sidebar />} />
       </Routes>
     </Router>
   )

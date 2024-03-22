@@ -14,9 +14,9 @@ const ViewTicketUser = () => {
             <div className='p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
                 <h6 className='font-weight-bold mb-4'>YOUR ISSUE</h6>
                 <Row>
-                    <Col sm={8}>
+                    <Col sm={7}>
                         <Form>
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalProblemType">
+                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalTicketType">
                                 <Form.Label column lg={3}>
                                     Problem Type
                                 </Form.Label>
@@ -47,7 +47,7 @@ const ViewTicketUser = () => {
                             </Form.Group>
 
 
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalProblemType">
+                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalTicketArea">
                                 <Form.Label column lg={3}>
                                     Problem Area
                                 </Form.Label>
@@ -77,26 +77,26 @@ const ViewTicketUser = () => {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalTitle">
+                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalTicketTitle">
                                 <Form.Label column sm={3}>
                                     Title
                                 </Form.Label>
                                 <Col sm={10} lg={9}>
-                                    <input style={{ width: '100%' }} type="text" class="form-control" id="title" />
+                                    <input style={{ width: '100%' }} type="text" class="form-control" id="ticketTitle" />
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTicketDetails">
                                 <Form.Label>Tell us more about your problem</Form.Label>
                                 <Form.Control as="textarea" rows={3} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTicketError">
                                 <Form.Label>Exact error message (if applicable)</Form.Label>
                                 <Form.Control as="textarea" rows={2} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTicketSteps">
                                 <Form.Label>Steps to reproduce the issue</Form.Label>
                                 <Form.Control as="textarea" rows={3} />
                             </Form.Group>
@@ -115,7 +115,7 @@ const ViewTicketUser = () => {
                                 </Col>
 
                                 <Col sm={5} className='d-flex justify-content-center'>
-                                    <Form.Group as={Row} controlId="formHorizontalSubmit">
+                                    <Form.Group as={Row} controlId="formHorizontalConsultant">
                                         <Form.Label style={{ fontSize: '14px', padding: 0 }}>
                                             Consultant
                                         </Form.Label>
@@ -127,8 +127,8 @@ const ViewTicketUser = () => {
 
                         </Form>
                     </Col>
-                    <Col>
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalAttach">
+                    <Col sm={5}>
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalHistory">
                             <Form.Label column sm={8} className='font-weight-bold'>
                                 History
                             </Form.Label>
