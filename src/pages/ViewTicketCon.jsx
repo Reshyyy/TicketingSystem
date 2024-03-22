@@ -83,7 +83,7 @@ const ViewTicketCon = () => {
 
     useEffect(() => {
         if (viewTicketDetails) {
-            setStatus(viewTicketDetails.StatusName)
+            setStatus(viewTicketDetails.Header.StatusName)
         }
     }, [viewTicketDetails])
 
@@ -150,16 +150,19 @@ const ViewTicketCon = () => {
                                 <Form.Label column>
                                     Status
                                 </Form.Label>
-                                <Col lg={3}>
-                                    <Form.Select aria-label="Default select example" value={status || ''} onChange={(e) => setStatus(e.target.value)}>
-                                        {/* <option value="">Select an option...</option> */}
-                                        {statuses.map((st) => (
-                                            <option key={st.StatusID} value={st.StatusName}>
-                                                {st.StatusName}
-                                            </option>
-                                        ))}
-                                    </Form.Select>
-                                </Col>
+                                {viewTicketDetails && (
+                                    <Col lg={3}>
+                                        <Form.Select aria-label="Default select example" value={status || ''} onChange={(e) => setStatus(e.target.value)}>
+                                            {/* <option value="">Select an option...</option> */}
+                                            {statuses.map((st) => (
+                                                <option key={st.StatusID} value={st.StatusName}>
+                                                    {st.StatusName}
+                                                </option>
+                                            ))}
+                                        </Form.Select>
+                                    </Col>
+                                )}
+
                             </Form.Group>
 
 
