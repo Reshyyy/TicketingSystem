@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { Button, Col, Container, Form, Nav, Row, Stack } from 'react-bootstrap'
 import Create from '../components/Create'
@@ -10,15 +10,42 @@ import NavbarMain from '../components/header/NavbarMain'
 import Sidebar from '../components/sidebar/Sidebar'
 import MainLayout from '../components/layout/MainLayout'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const TSDashboard = () => {
     const [date, setDate] = useState(new Date());
     const [create, setCreate] = useState(null);
     const navigate = useNavigate();
+    const [submittedData, setSubmittedData] = useState([]);
+    const [viewTickets, setViewTickets] = useState([]);
 
     const handleCreateClick = async () => {
         navigate('/create');
     }
+
+    const handleTicketClick = (ticketID) => {
+        navigate(`/view-ticket/${ticketID}`); // Replace with your desired navigation logic
+    }
+
+    // const fetchViewTickets = async () => {
+    //     const formData = {
+    //         "ViewTicketLines": {
+    //             "ticketID": ""
+    //         }
+    //     }
+    //     try {
+    //         const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets', formData);
+    //         setViewTickets(response.data);
+    //     } catch (error) {
+    //         console.error('Error viewing tickets', error);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     fetchViewTickets();
+    // }, [])
+
+
 
     return (
         // Dashboard
@@ -89,37 +116,8 @@ const TSDashboard = () => {
 
 
                 </Row>
-                {/* <Row>
-                    <div className='d-flex'>
-                        <div className='mb-4'>
-                            <NewButton />
-                        </div>
-                        <div className='ml-2'>
-                            <Form.Select aria-label="Default select example">
-                                <option value="1">Low</option>
-                                <option value="2">Medium</option>
-                                <option value="3">High</option>
-                                <option value="4">Critical</option>
-                            </Form.Select>
-                        </div>
-                        <div className='ml-2'>
-                            <Form.Select aria-label="Default select example">
-                                <option value="newest">Newest</option>
-                                <option value="oldest">Oldest</option>
-                            </Form.Select>
-                        </div>
-
-                    </div>
-                </Row> */}
-
-                {/* <Row>
-                    <div>
-                        <Button onClick={handleCreateClick} variant="secondary" style={{ width: '80px' }}>Create</Button>
-                    </div>
-                </Row> */}
-
                 <Row className='mt-2'>
-                    <TicketTable />
+                    <TicketTable onTicketClick={handleTicketClick} />
                 </Row>
             </div>
         </MainLayout >

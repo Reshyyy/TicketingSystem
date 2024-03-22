@@ -11,13 +11,14 @@ const NavbarMain = () => {
 
             <Navbar expand="lg" className='p-0'>
                 {/* <Container> */}
-                <Col sm={10} className='d-flex justify-content-start p-0'>
+                <Col sm={10} className='d-flex justify-content-start align-items-center p-0'>
                     <Stack direction="horizontal" alignItems="center">
                         <img src={rafiNavbarLogo} style={{ height: '60px', width: '100px' }} alt="navbarLogo" />
                     </Stack>
                     <Stack direction="column" alignItems="start" gap={1}>
-                        <h6>Ticketing System</h6>
-                        <h6>RAFI - Ramon Aboitiz Foundation Inc.</h6>
+                        {/* <h6>Ticketing System</h6>
+                        <h6>RAFI - Ramon Aboitiz Foundation Inc.</h6> */}
+                        <Navbar.Brand><b>Ticketing System</b></Navbar.Brand>
                     </Stack>
                 </Col>
 

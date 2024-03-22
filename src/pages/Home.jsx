@@ -6,6 +6,7 @@ import './../components/styles/layout.css'
 import './../components/styles/loginpage.css'
 import './../components/styles/home.css'
 import LoginPage from './LoginPage'
+
 const Home = () => {
   return (
     <Layout>

@@ -8,99 +8,35 @@ import Layout from '../components/layout/Layout';
 import MainLayout from '../components/layout/MainLayout';
 import axios from 'axios';
 
-const TSCreate = () => {
-    const [problemType, setProblemType] = useState('');
-    const [problemArea, setProblemArea] = useState('');
-    const [ticketTitle, setTicketTitle] = useState('');
-    const [ticketDetails, setTicketDetails] = useState('');
-    const [ticketError, setTicketError] = useState('');
-    const [ticketSteps, setTicketSteps] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [issueAreas, setIssueAreas] = useState([]);
-
-    const [submittedData, setSubmittedData] = useState([]);
-    const fileInputRef = useRef(null);
-
-    useEffect(() => {
-        const fetchViewIssueAreas = async () => {
-            const formData = {
-        
-            }
-            try {
-                const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewIssueAreas');
-                if (response.status === 200) { // Assuming 200 is the success status
-                    setIssueAreas(response.data);
-                } else {
-                    console.error('Cannot fetch Issue Area', response.status);
-                }
-            } catch (error) {
-                console.error('Error while fetching Issue Areas', error)
-            }
-        }
-        fetchViewIssueAreas();
-    }, [])
-
-    const handleCreateSubmit = async (e) => {
-        e.preventDefault();
-
-        // Validation logic
-        if (!problemType || !problemArea || !ticketTitle || !ticketDetails) {
-            alert("Please fill in all required fields.");
-            return;
-        }
-
-
-        const formData = {
-            "AddTicket": {
-                issueTypeID: problemType,
-                issueAreaID: problemArea,
-                userID: "'ACC-0000001'",
-                ticketTitle: ticketTitle,
-                ticketDetails: ticketDetails,
-                ticketError: ticketError,
-                ticketSteps: ticketSteps,
-                ticketAttachFile: "''"
-            }
-        }
-
-        // Add Ticket
-        axios.post('/api/TicketingSystem/Dynamic/api?functionName=AddTicket', formData)
-            .then(response => {
-                console.log('Add Ticket Successful:', response.data);
-            })
-            .catch(error => {
-                console.error('Error adding ticket', error);
-                // Handle errors here, such as displaying an error message to the user
-            });
-
-
-
-    }
-
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
-    };
-
-    useEffect(() => {
-        if (selectedFile) {
-            console.log("File Name:", selectedFile.name);
-            console.log("File Size:", selectedFile.size, "bytes");
-        }
-    }, [selectedFile]);
-
+const ViewTicketUser = () => {
     return (
         <MainLayout>
             <div className='p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
-                <h6 className='font-weight-bold mb-4'>DESCRIBE YOUR ISSUE</h6>
+                <h6 className='font-weight-bold mb-4'>YOUR ISSUE</h6>
                 <Row>
                     <Col sm={8}>
-                        <Form onSubmit={handleCreateSubmit}>
+                        <Form>
                             <Form.Group as={Row} className="mb-3" controlId="formHorizontalProblemType">
-                                <Form.Label column sm={3}>
+                                <Form.Label column lg={3}>
                                     Problem Type
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example" value={problemType} onChange={(e) => setProblemType(e.target.value)}>
+                                    <Form.Select aria-label="Default select example">
+                                        <option value="">Select an option...</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
+                                    </Form.Select>
+                                </Col>
+                                <Col>
+
+                                </Col>
+                                <Form.Label column>
+                                    Status
+                                </Form.Label>
+                                <Col lg={3}>
+                                    <Form.Select aria-label="Default select example">
                                         <option value="">Select an option...</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
@@ -110,16 +46,33 @@ const TSCreate = () => {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalProblemArea">
-                                <Form.Label column sm={3}>
+
+                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalProblemType">
+                                <Form.Label column lg={3}>
                                     Problem Area
                                 </Form.Label>
                                 <Col sm={10} lg={4}>
-                                    <Form.Select aria-label="Default select example" value={problemArea} onChange={(e) => setProblemArea(e.target.value)}>
+                                    <Form.Select aria-label="Default select example">
                                         <option value="">Select an option...</option>
-                                        <option value="Fixed Assets">Fixed assets</option>
-                                        <option value="General Ledger">General Ledger</option>
-                                        <option value="Public Sector">Public sector</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
+                                    </Form.Select>
+                                </Col>
+                                <Col>
+
+                                </Col>
+                                <Form.Label column>
+                                    Severity
+                                </Form.Label>
+                                <Col lg={3}>
+                                    <Form.Select aria-label="Default select example">
+                                        <option value="">Select an option...</option>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
                                     </Form.Select>
                                 </Col>
                             </Form.Group>
@@ -129,44 +82,44 @@ const TSCreate = () => {
                                     Title
                                 </Form.Label>
                                 <Col sm={10} lg={9}>
-                                    <input style={{ width: '100%' }} type="text" value={ticketTitle} onChange={(e) => setTicketTitle(e.target.value)} class="form-control" id="title" />
+                                    <input style={{ width: '100%' }} type="text" class="form-control" id="title" />
                                 </Col>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Tell us more about your problem</Form.Label>
-                                <Form.Control as="textarea" value={ticketDetails} onChange={(e) => setTicketDetails(e.target.value)} rows={3} />
+                                <Form.Control as="textarea" rows={3} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Exact error message (if applicable)</Form.Label>
-                                <Form.Control as="textarea" value={ticketError} onChange={(e) => setTicketError(e.target.value)} rows={2} />
+                                <Form.Control as="textarea" rows={2} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Steps to reproduce the issue</Form.Label>
-                                <Form.Control as="textarea" value={ticketSteps} onChange={(e) => setTicketSteps(e.target.value)} rows={3} />
+                                <Form.Control as="textarea" rows={3} />
                             </Form.Group>
 
                             <Form.Group as={Row} className="" controlId="formHorizontalAttach">
 
                                 <Col sm={6}>
-                                    <Form.Label style={{ fontSize: '14px' }}>
+                                    <Form.Label style={{ fontSize: '14px', padding: 0 }}>
                                         Attach file or screenshot of Issue (4 MB Maximum)
                                     </Form.Label>
-                                    <Form.Control type="file" ref={fileInputRef} onChange={handleFileChange} />
+                                    <Form.Control type="file" />
                                 </Col>
 
-                                <Col sm={3}>
+                                <Col sm={1} style={{ padding: 0 }}>
 
                                 </Col>
 
-                                <Col sm={3} className='d-flex justify-content-start'>
+                                <Col sm={5} className='d-flex justify-content-center'>
                                     <Form.Group as={Row} controlId="formHorizontalSubmit">
-                                        <Form.Label style={{ fontSize: '14px', fontStyle: 'italic' }}>
-                                            Solution not in the list?
+                                        <Form.Label style={{ fontSize: '14px', padding: 0 }}>
+                                            Consultant
                                         </Form.Label>
-                                        <Button type="submit" id="solution" className='btn btn-sm btn-secondary'>Submit</Button>
+                                        <input style={{ width: '100%' }} type="text" class="form-control" id="title" />
                                     </Form.Group>
                                 </Col>
 
@@ -177,7 +130,7 @@ const TSCreate = () => {
                     <Col>
                         <Form.Group as={Row} className="mb-3" controlId="formHorizontalAttach">
                             <Form.Label column sm={8} className='font-weight-bold'>
-                                POSSIBLE ISSUE SOLUTIONS
+                                History
                             </Form.Label>
                             <Stack>
                                 <div className='bg-light p-3' style={{ height: '100%' }}>
@@ -219,10 +172,7 @@ const TSCreate = () => {
                 </Row> */}
             </div>
         </MainLayout>
-
-
-
     )
 }
 
-export default TSCreate
+export default ViewTicketUser

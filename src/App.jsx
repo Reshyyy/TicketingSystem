@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import Sidebar from './components/sidebar/Sidebar';
 import Register from './pages/Register';
 import TSDashboard from './pages/TSDashboard';
+import ViewTicketUser from './pages/ViewTicketUser';
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+
+        {/* User */}
+        <Route path="/view-ticket/:ticketID" element={<ViewTicketUser />} />
 
         {/* <Route path="/dashboard" element={
           isLoggedIn ? <TSDashboard /> : <LoginPage setIsLoggedIn={setIsLoggedIn} />
