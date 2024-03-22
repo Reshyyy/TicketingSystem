@@ -53,16 +53,6 @@ const TicketTable = ({ onTicketClick }) => {
                             {/* <td>{ticket.TicketAge}</td> */}
                         </tr>
                     ))}
-                    {/* <tr>
-                        <td>7/20/2018</td>
-                        <td>TCK-000000001</td>
-                        <td>Critical</td>
-                        <td>Cannot Print Invoice</td>
-                        <td>In Progress</td>
-                        <td>Christian Granada Jr.</td>
-                        <td>Lizzette.Villahermosa</td>
-                        <td>1</td>
-                    </tr> */}
                 </tbody>
             </table>
         </div>

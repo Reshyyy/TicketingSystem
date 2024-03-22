@@ -7,8 +7,40 @@ import Row from 'react-bootstrap/Row';
 import Layout from '../components/layout/Layout';
 import MainLayout from '../components/layout/MainLayout';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const ViewTicketUser = () => {
+    // Local Variables
+    const [viewTicketDetails, setViewTicketDetails] = useState([]);
+    const { ticketID } = useParams();
+
+    // Fetch and Render Data
+    useEffect(() => {
+        const fetchTicketDetails = async () => {
+            const formData = {
+                "Header": {
+                    "ViewTicket": {
+                        "ticketID": `'${ticketID}'`
+                    }
+                },
+                "Details":
+                {
+                    "ViewTicketLines": {
+                        "ticketID": `'${ticketID}'`
+                    }
+                }
+
+            }
+            try {
+                const response = await axios.post('/api/TicketingSystem/Dynamic/api/View', formData);
+                setViewTicketDetails(response.data);
+            } catch (error) {
+                console.error('Error while fetching Issue Areas', error)
+            }
+        }
+        fetchTicketDetails();
+    }, [])
+
     return (
         <MainLayout>
             <div className='p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
