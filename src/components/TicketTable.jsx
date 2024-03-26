@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
+import MyPagination from './../pagination'
 import axios from 'axios'
 
-const TicketTable = ({ onTicketClick }) => {
+const TicketTable = ({ onTicketClick, currentPage, onPageChange }) => {
     // Variables
     const [viewTickets, setViewTickets] = useState([]); // view all
     const [viewTicketPerUser, setViewTicketPerUser] = useState([]); // per user

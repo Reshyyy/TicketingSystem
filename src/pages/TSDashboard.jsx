@@ -11,6 +11,7 @@ import Sidebar from '../components/sidebar/Sidebar'
 import MainLayout from '../components/layout/MainLayout'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import MyPagination from './../pagination'
 
 const TSDashboard = () => {
     const [date, setDate] = useState(new Date());
@@ -18,6 +19,10 @@ const TSDashboard = () => {
     const navigate = useNavigate();
     const [submittedData, setSubmittedData] = useState([]);
     const [viewTickets, setViewTickets] = useState([]);
+    const [page, setPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalItems, setTotalItems] = useState(0); // Assuming you have access to the total number of items
+    const itemsPerPage = 10; // Assuming you want to display 10 items per page
 
     const handleCreateClick = async () => {
         navigate('/create');
@@ -26,6 +31,10 @@ const TSDashboard = () => {
     const handleTicketClick = (ticketID) => {
         navigate(`/tickets/${ticketID}`); // Replace with your desired navigation logic
     }
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
 
     // const fetchViewTickets = async () => {
     //     const formData = {
@@ -45,8 +54,23 @@ const TSDashboard = () => {
     //     fetchViewTickets();
     // }, [])
 
+    useEffect(() => {
+        // Fetch totalItems from API or wherever you get it from
+        const fetchTotalItems = async () => {
+            try {
+                // Example API call to fetch totalItems
+                const response = await axios.get('/api/totalItems');
+                setTotalItems(response.data.totalItems);
+            } catch (error) {
+                console.error('Error fetching totalItems', error);
+            }
+        };
+
+        fetchTotalItems();
+    }, []);
 
 
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
     return (
         // Dashboard
         <MainLayout>
@@ -117,8 +141,17 @@ const TSDashboard = () => {
 
                 </Row>
                 <Row className='mt-2'>
-                    <TicketTable onTicketClick={handleTicketClick} />
+                    <TicketTable
+                        onTicketClick={handleTicketClick}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                    />
                 </Row>
+                <MyPagination
+                    total={totalPages}
+                    current={currentPage}
+                    onChangePage={handlePageChange}
+                />
                 <div>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
