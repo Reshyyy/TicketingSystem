@@ -251,14 +251,14 @@ const ViewTicketCon = () => {
 
                                 </Col>
 
-                                {/* <Col sm={4} className='d-flex justify-content-center'>
+                                <Col sm={4} className='d-flex justify-content-center'>
                                     <Form.Group as={Row} controlId="formHorizontalConsultant">
                                         <Form.Label style={{ fontSize: '14px', padding: 0 }}>
-                                            Consultant
+                                            Filed by
                                         </Form.Label>
-                                        <input style={{ width: '100%' }} disabled value={viewTicketDetails.Header.ConsultantFirstName + " " + viewTicketDetails.Header.ConsultantMiddleName + " " + viewTicketDetails.Header.ConsultantLastName} type="text" class="form-control" id="title" />
+                                        <input style={{ width: '100%' }} disabled value={viewTicketDetails.Header.FirstName + " " + viewTicketDetails.Header.MiddleName + " " + viewTicketDetails.Header.LastName} type="text" class="form-control" id="title" />
                                     </Form.Group>
-                                </Col> */}
+                                </Col>
 
                             </Form.Group>
 
