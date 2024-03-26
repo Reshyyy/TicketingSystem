@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const TicketTableCon = ({ onTicketClick }) => {
     // Variables
-    // const [viewTickets, setViewTickets] = useState([]);
+    const [viewTickets, setViewTickets] = useState([]);
     const [viewTicketsPerConsultant, setViewTicketsPerConsultant] = useState([]);
     const currentDate = new Date();
 
@@ -20,14 +20,15 @@ const TicketTableCon = ({ onTicketClick }) => {
 
 
     // Fetch Data
-    // const fetchViewTickets = async () => {
-    //     try {
-    //         const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets');
-    //         setViewTickets(response.data);
-    //     } catch (error) {
-    //         console.error('Error viewing tickets', error);
-    //     }
-    // }
+    const fetchViewTickets = async () => {
+        try {
+            const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewTickets');
+            setViewTickets(response.data);
+        } catch (error) {
+            console.error('Error viewing tickets', error);
+        }
+    }
+
     const fetchViewTicketsPerConsultant = async () => {
         const formData = {
             "ViewTicketsPerConsultant": {
@@ -46,6 +47,7 @@ const TicketTableCon = ({ onTicketClick }) => {
     // Execute
     useEffect(() => {
         fetchViewTicketsPerConsultant();
+        // fetchViewTickets();
     }, []);
 
     return (

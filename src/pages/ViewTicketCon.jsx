@@ -7,11 +7,11 @@ import Row from 'react-bootstrap/Row';
 import Layout from '../components/layout/Layout';
 import MainLayout from '../components/layout/MainLayout';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ViewTicketCon = () => {
     // Local Variables
-    const [viewTicketDetails, setViewTicketDetails] = useState({ Header: {} });
+    const [viewTicketDetails, setViewTicketDetails] = useState({ Header: {}, Details: {} });
     const [issueTypes, setIssueTypes] = useState([]);
     const [consultants, setConsultants] = useState([]);
     const [consultant, setConsultant] = useState('');
@@ -22,6 +22,7 @@ const ViewTicketCon = () => {
     const [lineName, setLineName] = useState('');
     const [lineComment, setLineComment] = useState('');
     const { ticketID } = useParams();
+    const navigate = useNavigate();
 
 
     // Fetch Data and Render of Data
@@ -44,6 +45,11 @@ const ViewTicketCon = () => {
             try {
                 const response = await axios.post('/api/TicketingSystem/Dynamic/api/View', formData);
                 setViewTicketDetails(response.data);
+                setStatus(response.data.Header.StatusID);
+                setSeverity(response.data.Header.SeverityID);
+                // setLineName(response.data.Details.LineName);
+                // setLineComment(response.data.Header.LineComment);
+                // console.log(response.data.Details.LineID)
             } catch (error) {
                 console.error('Error while fetching Issue Areas', error)
             }
@@ -53,6 +59,7 @@ const ViewTicketCon = () => {
             try {
                 const response = await axios.post('/api/TicketingSystem/Dynamic/api?functionName=ViewConsultants');
                 setConsultants(response.data);
+                // setConsultant(response.data);
             } catch (error) {
                 console.error('Error while fetching Issue Areas', error)
             }
@@ -81,19 +88,14 @@ const ViewTicketCon = () => {
         fetchStatuses();
     }, [])
 
-    useEffect(() => {
-        if (viewTicketDetails) {
-            setStatus(viewTicketDetails.Header.StatusName)
-        }
-    }, [viewTicketDetails])
-
     const handleAddTicketLines = async (e) => {
         e.preventDefault();
 
         const formData = {
             "AddTicketLine": {
                 TicketID: `'${ticketID}'`,
-                ConsultantID: `'${consultant}'`,
+                // ConsultantID: `'${consultant}'`,
+                ConsultantID: `'ACC-0000002'`,
                 SeverityID: `'${severity}'`,
                 StatusID: `'${status}'`,
                 LineName: lineName,
@@ -105,7 +107,7 @@ const ViewTicketCon = () => {
         axios.post('/api/TicketingSystem/Dynamic/api?functionName=AddTicketLine', formData)
             .then(response => {
                 console.log('Add Ticket Lines Successful:', response.data);
-                navigate('/consultant/dashboard');
+                // navigate('/consultant/dashboard');
             })
             .catch(error => {
                 console.error('Error adding ticket lines', error);
@@ -113,8 +115,19 @@ const ViewTicketCon = () => {
             });
     }
 
+    // useEffect(() => {
+    //     // if (viewTicketDetails) {
+    //         setStatus(viewTicketDetails.Header.StatusName);
+    //         setSeverity(viewTicketDetails.Header.SeverityName);
+    //         setConsultant(viewTicketDetails.FirstName)
+    //         console.log(severity);
+    //     // }
+    //     console.log(viewTicketDetails)
+    // }, [viewTicketDetails])
+
     return (
         <MainLayout>
+
             <div className='p-5 mt-3 shadow p-3 mb-5 bg-white rounded'>
                 <h6 className='font-weight-bold mb-4'>ISSUE FILED</h6>
                 <Row>
@@ -150,22 +163,21 @@ const ViewTicketCon = () => {
                                 <Form.Label column>
                                     Status
                                 </Form.Label>
-                                {viewTicketDetails && (
-                                    <Col lg={3}>
-                                        <Form.Select aria-label="Default select example" value={status || ''} onChange={(e) => setStatus(e.target.value)}>
-                                            {/* <option value="">Select an option...</option> */}
-                                            {statuses.map((st) => (
-                                                <option key={st.StatusID} value={st.StatusName}>
-                                                    {st.StatusName}
-                                                </option>
-                                            ))}
-                                        </Form.Select>
-                                    </Col>
-                                )}
-
+                                <Col lg={3}>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        value={status || ''}
+                                        onChange={(e) => setStatus(e.target.value)}
+                                    >
+                                        {/* <option value="">Select an option...</option> */}
+                                        {statuses.map((st) => (
+                                            <option key={st.StatusID} value={st.StatusID}>
+                                                {st.StatusName}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+                                </Col>
                             </Form.Group>
-
-
                             <Form.Group as={Row} className="mb-3" controlId="formHorizontalTicketArea">
                                 <Form.Label column lg={3}>
                                     Problem Area
@@ -187,8 +199,12 @@ const ViewTicketCon = () => {
                                     Severity
                                 </Form.Label>
                                 <Col lg={3}>
-                                    <Form.Select aria-label="Default select example" value={severity} onChange={(e) => setSeverity(e.target.value)}>
-                                        <option value="">Select an option...</option>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        value={severity || ''}
+                                        onChange={(e) => setSeverity(e.target.value)}
+                                    >
+                                        {/* <option value="">Select an option...</option> */}
                                         {severities.map((sev) => (
                                             <option key={sev.SeverityID} value={sev.SeverityID}>
                                                 {sev.SeverityName}
@@ -282,23 +298,24 @@ const ViewTicketCon = () => {
                                     Add Update Title
                                 </Form.Label>
                                 <Stack>
-                                    <input style={{ width: '100%' }} value={lineName} onChange={(e) => setLineName(e.target.value)} type="text" class="form-control" id="updateTitle" />
+                                    <input style={{ width: '100%' }} value={lineName || ''} onChange={(e) => setLineName(e.target.value)} type="text" class="form-control" id="updateTitle" />
                                 </Stack>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="exampleForm.ControlComment">
                                 <Form.Label>Comment</Form.Label>
-                                <Form.Control as="textarea" value={lineComment} onChange={(e) => setLineComment(e.target.value)} rows={2} />
+                                <Form.Control as="textarea" value={lineComment || ''} onChange={(e) => setLineComment(e.target.value)} rows={2} />
                             </Form.Group>
 
                             <Row>
                                 <Col>
-                                    <Form.Group className="" controlId="exampleForm.ControlComment">
+                                    <Form.Group className="" controlId="exampleForm.ControlConsultants">
                                         <Form.Label>Consultant</Form.Label>
-                                        <Form.Select aria-label="Default select example" value={consultant} onChange={(e) => setConsultant(e.target.value)}>
-                                            <option value="">Select an option...</option>
+                                        <Form.Select aria-label="Default select example" value={consultant || ''} onChange={(e) => setConsultant(e.target.value)}>
+                                            {/* <option value="">Select an option...</option> */}
                                             {consultants.map((con) => (
                                                 <option key={con.UserID} value={con.UserID}>
+                                                    {/* {con.UserID} */}
                                                     {con.FirstName + " " + con.MiddleName + " " + con.LastName}
                                                 </option>
                                             ))}

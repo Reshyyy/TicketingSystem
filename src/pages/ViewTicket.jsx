@@ -236,7 +236,7 @@ const ViewTicket = () => {
                                     <Col sm={7}>
                                         <Form.Group className="" controlId="exampleForm.ControlComment">
                                             <Form.Label>Consultant</Form.Label>
-                                            <Form.Select aria-label="Default select example" value={consultant} onChange={(e) => setConsultant(e.target.value)}>
+                                            <Form.Select aria-label="Default select example" value={consultant || ''} onChange={(e) => setConsultant(e.target.value)}>
                                                 <option value="">Select an option...</option>
                                                 {consultants.map((con) => (
                                                     <option key={con.UserID} value={con.UserID}>
